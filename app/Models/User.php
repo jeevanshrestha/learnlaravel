@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Note;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const VERIFIED_USER = '1';
+    const UNVERIFIED_USER = '0';
+
+    const ADMIN_USER = 'true';
+    const REGULAR_USER = 'false';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +28,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'verified',
+        'verification_token',
+        'admin',
     ];
 
     /**
@@ -43,7 +52,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function notes(){
-        return    $this->hasMany(Note::class);
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function isVerified()
+    {
+        return $this->verified == USER::VERIFIED_USER;
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin == USER::ADMIN_USER;
+    }
+
+    public static function generateVerificationCode()
+    {
+
+        return Str::random(40);
     }
 }
