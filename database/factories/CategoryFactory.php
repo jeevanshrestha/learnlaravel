@@ -16,8 +16,10 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+
+             return [
+                 'name'=>$this->faker->word,
+                 'description'=>$this->faker->paragraph(1),
+             ];
     }
 }
