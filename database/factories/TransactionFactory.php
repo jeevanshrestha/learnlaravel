@@ -20,7 +20,8 @@ class TransactionFactory extends Factory
     public function definition()
     {
 
-        $seller = Seller::has('product')->get->random();
+
+        $seller = Seller::has('product')->get()->random();
         $buyer = User::all()->except($seller->id)->random();
         return [
 
