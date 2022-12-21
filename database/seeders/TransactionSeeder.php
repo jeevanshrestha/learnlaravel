@@ -15,6 +15,6 @@ class TransactionSeeder extends Seeder
      */
     public function run()
     {
-        Transaction::factory()->times(200)->create();
+        Transaction::factory()->times(1000)->create();
     }
 }
