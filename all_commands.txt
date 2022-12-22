@@ -1,0 +1,81 @@
+#create model migration factory and seed
+sail artisan make:model Petition -mfs
+
+
+#create api controller
+sail artisan make:controller PetitionController --api --model=Petition
+
+#create Resource
+sail artisan make:resource PetitionResource
+
+#create Collection
+sail artisan make:resource PetitionCollection
+
+
+
+#add doctrine/dbal
+sail composer require doctrine/dbal
+
+
+#create migration to change category type migration in petition table 
+ sail artisan make:migration change_category_type_in_petitions  
+
+
+#seed db
+
+sail artisan db:seed 
+sail artisan db:seed --class=PetitionSeeder
+
+
+ #check all the route list
+ sail artisan route:list
+
+
+ #create Author model, api contorller, migration, factory, seeder, resource, collection
+  sail artisan make:model Author -mfs  
+
+  sail artisan make:controller AuthorController --api --model=Author
+
+  sail artisan make:resource AuthorResource  
+
+  sail artisan make:resource AuthorCollection
+
+
+sail artisan db:seed --class=AuthorSeeder
+
+
+sail artisan make:controller Buyer/BuyerController --api --model=Buyer -r
+sail artisan make:resource BuyerResource  
+sail artisan make:resource BuyerCollection
+
+
+sail artisan make:controller Seller/SellerController --api --model=Seller -r
+sail artisan make:resource SellerResource  
+sail artisan make:resource SellerCollection
+
+sail artisan make:controller Category/CategoryController --api --model=Category -r
+sail artisan make:resource CategoryResource  
+sail artisan make:resource Categoryollection
+
+sail artisan make:controller Product/ProductController --api --model=Product -r
+sail artisan make:resource ProductResource  
+sail artisan make:resource ProductCollection
+
+sail artisan make:controller Transaction/TransactionController --api --model=Transaction -r
+sail artisan make:resource TransactionResource  
+sail artisan make:resource TransactionCollection
+
+
+sail artisan make:controller User/Userontroller --api --model=User -r
+sail artisan make:resource UserResource  
+sail artisan make:resource UserCollection
+
+ sail artisan make:seeder UserSeeder
+
+
+sail artisan db:seed
+
+sail artisan db:seed --class=UserSeeder
+sail artisan db:seed --class=CategorySeeder
+sail artisan db:seed --class=ProductSeeder
+sail artisan db:seed --class=TransactionSeeder
